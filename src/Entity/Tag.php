@@ -29,18 +29,50 @@ class Tag
     private $tag;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * Get the value of id
      *
-     * @ORM\ManyToMany(targetEntity="Article", mappedBy="idTag")
+     * @return  int
      */
-    private $idArticle;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * Constructor
+     * Set the value of id
+     *
+     * @param  int  $id
+     *
+     * @return  self
      */
-    //public function __construct()
-    //{
-    //    $this->idArticle = new \Doctrine\Common\Collections\ArrayCollection();
-    //}
+    public function setId(int $id)
+    {
+        $this->id = $id;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of tag
+     *
+     * @return  string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set the value of tag
+     *
+     * @param  string  $tag
+     *
+     * @return  self
+     */
+    public function setTag(string $tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
 }

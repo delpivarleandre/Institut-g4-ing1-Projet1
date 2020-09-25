@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TagArticle
 {
     /**
-     * @var \Article
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Article")
      * @ORM\JoinColumns({
@@ -23,7 +23,7 @@ class TagArticle
     private $idArticle;
 
     /**
-     * @var \Tag
+     * @var int
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -34,5 +34,51 @@ class TagArticle
      */
     private $idTag;
 
+    /**
+     * Get the value of idArticle
+     *
+     * @return  int
+     */
+    public function getIdArticle()
+    {
+        return $this->idArticle;
+    }
 
+    /**
+     * Set the value of idArticle
+     *
+     * @param  int  $idArticle
+     *
+     * @return  self
+     */
+    public function setIdArticle(int $idArticle)
+    {
+        $this->idArticle = $idArticle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idTag
+     *
+     * @return  int
+     */
+    public function getIdTag()
+    {
+        return $this->idTag;
+    }
+
+    /**
+     * Set the value of idTag
+     *
+     * @param  int  $idTag
+     *
+     * @return  self
+     */
+    public function setIdTag(int $idTag)
+    {
+        $this->idTag = $idTag;
+
+        return $this;
+    }
 }

@@ -29,7 +29,7 @@ class Commentaire
     private $contenu;
 
     /**
-     * @var \Article
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Article")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class Commentaire
     private $idArticle;
 
     /**
-     * @var \User
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -47,6 +47,4 @@ class Commentaire
      * })
      */
     private $idUser;
-
-
 }
