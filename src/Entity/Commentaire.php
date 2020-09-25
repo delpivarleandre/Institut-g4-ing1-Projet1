@@ -47,4 +47,100 @@ class Commentaire
      * })
      */
     private $idUser;
+
+    /**
+     * Get the value of id
+     *
+     * @return  int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @param  int  $id
+     *
+     * @return  self
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of contenu
+     *
+     * @return  string
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    /**
+     * Set the value of contenu
+     *
+     * @param  string  $contenu
+     *
+     * @return  self
+     */
+    public function setContenu(string $contenu)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idArticle
+     *
+     * @return  int
+     */
+    public function getIdArticle()
+    {
+        return $this->idArticle;
+    }
+
+    /**
+     * Set the value of idArticle
+     *
+     * @param  int  $idArticle
+     *
+     * @return  self
+     */
+    public function setIdArticle(int $idArticle)
+    {
+        $this->idArticle = $idArticle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idUser
+     *
+     * @return  int
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * Set the value of idUser
+     *
+     * @param  int  $idUser
+     *
+     * @return  self
+     */
+    public function setIdUser(int $idUser)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 }
