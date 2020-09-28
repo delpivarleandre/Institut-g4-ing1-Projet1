@@ -2,203 +2,188 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Article
- *
- * @ORM\Table(name="Article", indexes={@ORM\Index(name="id user", columns={"id_user"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $titre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="contenu", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="text")
      */
     private $contenu;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datecrea", type="date", nullable=false, options={"default"="current_timestamp()"})
+     * @ORM\Column(type="datetime")
      */
-    private $datecrea = 'current_timestamp()';
+    private $date_crea;
 
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="datemodif", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="datetime")
      */
-    private $datemodif = 'NULL';
+    private $date_modif;
 
     /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idUser;
+    private $id_user;
 
     /**
-     * Get the value of id
-     *
-     * @return  int
+     * @ORM\OneToMany(targetEntity=TagArticle::class, mappedBy="id_article", orphanRemoval=true)
      */
-    public function getId()
+    private $tagArticles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="id_article", orphanRemoval=true)
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->tagArticles = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param  int  $id
-     *
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of titre
-     *
-     * @return  string
-     */
-    public function getTitre()
+    public function getTitre(): ?string
     {
         return $this->titre;
     }
 
-    /**
-     * Set the value of titre
-     *
-     * @param  string  $titre
-     *
-     * @return  self
-     */
-    public function setTitre(string $titre)
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
         return $this;
     }
 
-    /**
-     * Get the value of contenu
-     *
-     * @return  string
-     */
-    public function getContenu()
+    public function getContenu(): ?string
     {
         return $this->contenu;
     }
 
-    /**
-     * Set the value of contenu
-     *
-     * @param  string  $contenu
-     *
-     * @return  self
-     */
-    public function setContenu(string $contenu)
+    public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
 
         return $this;
     }
 
-    /**
-     * Get the value of datecrea
-     *
-     * @return  \DateTime
-     */
-    public function getDatecrea()
+    public function getDateCrea(): ?\DateTimeInterface
     {
-        return $this->datecrea;
+        return $this->date_crea;
     }
 
-    /**
-     * Set the value of datecrea
-     *
-     * @param  \DateTime  $datecrea
-     *
-     * @return  self
-     */
-    public function setDatecrea(\DateTime $datecrea)
+    public function setDateCrea(\DateTimeInterface $date_crea): self
     {
-        $this->datecrea = $datecrea;
+        $this->date_crea = $date_crea;
+
+        return $this;
+    }
+
+    public function getDateModif(): ?\DateTimeInterface
+    {
+        return $this->date_modif;
+    }
+
+    public function setDateModif(\DateTimeInterface $date_modif): self
+    {
+        $this->date_modif = $date_modif;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?User $id_user): self
+    {
+        $this->id_user = $id_user;
 
         return $this;
     }
 
     /**
-     * Get the value of datemodif
-     *
-     * @return  \DateTime|null
+     * @return Collection|TagArticle[]
      */
-    public function getDatemodif()
+    public function getTagArticles(): Collection
     {
-        return $this->datemodif;
+        return $this->tagArticles;
     }
 
-    /**
-     * Set the value of datemodif
-     *
-     * @param  \DateTime|null  $datemodif
-     *
-     * @return  self
-     */
-    public function setDatemodif($datemodif)
+    public function addTagArticle(TagArticle $tagArticle): self
     {
-        $this->datemodif = $datemodif;
+        if (!$this->tagArticles->contains($tagArticle)) {
+            $this->tagArticles[] = $tagArticle;
+            $tagArticle->setIdArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTagArticle(TagArticle $tagArticle): self
+    {
+        if ($this->tagArticles->contains($tagArticle)) {
+            $this->tagArticles->removeElement($tagArticle);
+            // set the owning side to null (unless already changed)
+            if ($tagArticle->getIdArticle() === $this) {
+                $tagArticle->setIdArticle(null);
+            }
+        }
 
         return $this;
     }
 
     /**
-     * Get the value of idUser
-     *
-     * @return  int
+     * @return Collection|Commentaire[]
      */
-    public function getIdUser()
+    public function getCommentaires(): Collection
     {
-        return $this->idUser;
+        return $this->commentaires;
     }
 
-    /**
-     * Set the value of idUser
-     *
-     * @param  int  $idUser
-     *
-     * @return  self
-     */
-    public function setIdUser(int $idUser)
+    public function addCommentaire(Commentaire $commentaire): self
     {
-        $this->idUser = $idUser;
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setIdArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getIdArticle() === $this) {
+                $commentaire->setIdArticle(null);
+            }
+        }
 
         return $this;
     }

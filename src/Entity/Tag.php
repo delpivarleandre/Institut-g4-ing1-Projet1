@@ -2,74 +2,37 @@
 
 namespace App\Entity;
 
+use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tag
- *
- * @ORM\Table(name="Tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TagRepository::class)
  */
 class Tag
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $tag;
 
-    /**
-     * Get the value of id
-     *
-     * @return  int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param  int  $id
-     *
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of tag
-     *
-     * @return  string
-     */
-    public function getTag()
+    public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    /**
-     * Set the value of tag
-     *
-     * @param  string  $tag
-     *
-     * @return  self
-     */
-    public function setTag(string $tag)
+    public function setTag(string $tag): self
     {
         $this->tag = $tag;
 

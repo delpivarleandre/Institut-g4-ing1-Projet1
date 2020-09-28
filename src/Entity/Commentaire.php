@@ -2,144 +2,75 @@
 
 namespace App\Entity;
 
+use App\Repository\CommentaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Commentaire
- *
- * @ORM\Table(name="Commentaire", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_article", columns={"id_article"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CommentaireRepository::class)
  */
 class Commentaire
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="contenu", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="text")
      */
     private $contenu;
 
     /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_article", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idArticle;
+    private $id_user;
 
     /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idUser;
+    private $id_article;
 
-    /**
-     * Get the value of id
-     *
-     * @return  int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param  int  $id
-     *
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of contenu
-     *
-     * @return  string
-     */
-    public function getContenu()
+    public function getContenu(): ?string
     {
         return $this->contenu;
     }
 
-    /**
-     * Set the value of contenu
-     *
-     * @param  string  $contenu
-     *
-     * @return  self
-     */
-    public function setContenu(string $contenu)
+    public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
 
         return $this;
     }
 
-    /**
-     * Get the value of idArticle
-     *
-     * @return  int
-     */
-    public function getIdArticle()
+    public function getIdUser(): ?User
     {
-        return $this->idArticle;
+        return $this->id_user;
     }
 
-    /**
-     * Set the value of idArticle
-     *
-     * @param  int  $idArticle
-     *
-     * @return  self
-     */
-    public function setIdArticle(int $idArticle)
+    public function setIdUser(?User $id_user): self
     {
-        $this->idArticle = $idArticle;
+        $this->id_user = $id_user;
 
         return $this;
     }
 
-    /**
-     * Get the value of idUser
-     *
-     * @return  int
-     */
-    public function getIdUser()
+    public function getIdArticle(): ?Article
     {
-        return $this->idUser;
+        return $this->id_article;
     }
 
-    /**
-     * Set the value of idUser
-     *
-     * @param  int  $idUser
-     *
-     * @return  self
-     */
-    public function setIdUser(int $idUser)
+    public function setIdArticle(?Article $id_article): self
     {
-        $this->idUser = $idUser;
+        $this->id_article = $id_article;
 
         return $this;
     }

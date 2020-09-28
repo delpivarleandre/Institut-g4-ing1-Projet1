@@ -2,82 +2,54 @@
 
 namespace App\Entity;
 
+use App\Repository\TagArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TagArticle
- *
- * @ORM\Table(name="Tag-article", indexes={@ORM\Index(name="id_article", columns={"id_article"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=TagArticleRepository::class)
  */
 class TagArticle
 {
-    /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_article", referencedColumnName="id")
-     * })
-     */
-    private $idArticle;
 
     /**
-     * @var int
-     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Tag")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_tag", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="tagArticles")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idTag;
+    private $id_article;
 
     /**
-     * Get the value of idArticle
-     *
-     * @return  int
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity=Tag::class)
+     * @ORM\JoinColumn(nullable=false)
      */
-    public function getIdArticle()
+    private $id_tag;
+
+    public function getId(): ?int
     {
-        return $this->idArticle;
+        return $this->id;
     }
 
-    /**
-     * Set the value of idArticle
-     *
-     * @param  int  $idArticle
-     *
-     * @return  self
-     */
-    public function setIdArticle(int $idArticle)
+    public function getIdArticle(): ?Article
     {
-        $this->idArticle = $idArticle;
+        return $this->id_article;
+    }
+
+    public function setIdArticle(?Article $id_article): self
+    {
+        $this->id_article = $id_article;
 
         return $this;
     }
 
-    /**
-     * Get the value of idTag
-     *
-     * @return  int
-     */
-    public function getIdTag()
+    public function getIdTag(): ?Tag
     {
-        return $this->idTag;
+        return $this->id_tag;
     }
 
-    /**
-     * Set the value of idTag
-     *
-     * @param  int  $idTag
-     *
-     * @return  self
-     */
-    public function setIdTag(int $idTag)
+    public function setIdTag(?Tag $id_tag): self
     {
-        $this->idTag = $idTag;
+        $this->id_tag = $id_tag;
 
         return $this;
     }
