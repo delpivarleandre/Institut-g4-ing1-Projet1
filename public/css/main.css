@@ -5,3 +5,37 @@
     justify-content: space-evenly;
     
 }
+
+header {
+  padding-top: 3rem;
+}
+
+.header {
+  width:100%;
+  position: fixed;
+  top:0px;
+  left:0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #6a5650;
+}
+
+.search {
+  border: none;
+  text-align: left;
+  width: 90%;
+}
+
+.searchBar {
+  align-self: center;
+  width:30%;
+  height: 30px;
+  background-color: white;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: right;
+  align-items: flex-start;
+}
