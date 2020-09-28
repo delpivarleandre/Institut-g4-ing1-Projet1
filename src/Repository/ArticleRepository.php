@@ -23,6 +23,7 @@ class ArticleRepository extends ServiceEntityRepository
     //  * @return Article[] Returns an array of Article objects
     //  */
     /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
@@ -47,4 +48,13 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findArticle($id)
+    {
+        return $this->createQueryBuilder('article')
+            ->where('article.id= :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	{% block title %}
+		Voir
+	{% endblock %}
+	<!-- TODO MediaQueries a faire  -->
+	<div class="container">
+		<br>
+		<h3>(Si il y a pas de recherche) Liste des articles</h3>
+		<h3>(Si il y a une recherche) Liste des articles trouvés grâce aux tags {NOMS DES TAGS}</h2>
+		<br>
+		<br>
+		<div class="container-flex">
+
+			{%for art in article %}
+				<div class="card" style="width: 30%; margin-bottom: 2%;">
+					<div class="card-header">
+						<h5>
+							<strong>{{ art.getTitre() }}</strong>
+						</h5>
+					</div>
+					<div class="card-body" style="padding-top: 3px">
+						<small>{{ art.getDateCrea() |date('Y-m-d H:i:s')}}</small>
+						<p class="card-text">{{ art.getContenu() }}</p>
+						<a href="pageDetail/?id={{ art.getId }}" class="btn btn-outline-primary">Voir plus</a>
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+</div>{% endblock %}
