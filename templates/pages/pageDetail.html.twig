@@ -4,15 +4,18 @@
 {% endblock %}
 {% block body %}
 	<div class="container">
-		<div class="container">
-			<div class="jumbotron">
-
-
-				{{article[0].titre}}
-				{% for art in article %}
-					{{art.titre}}
-				{% endfor %}
+		<div class="jumbotron mt-5">
+			<div class="col-sm-8 mx-auto">
+				<h1 class="text-center">{{ article[0].titre }}</h1>
 			</div>
+			<br>
+			<small>{{ article[0].dateModif |date('Y-m-d H:i:s') }}</small>
+			<div style="text-align: center;">
+				<p>{{ article[0].contenu }}</p>
+			</div>
+			<small>{{ article[0].getIdUser().nom }}
+				{{ article[0].getIdUser().prenom }}</small>
+
 		</div>
 	</div>
 {% endblock %}

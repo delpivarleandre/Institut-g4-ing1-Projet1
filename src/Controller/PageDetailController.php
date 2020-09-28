@@ -10,13 +10,16 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PageDetailController extends AbstractController
 {
-    private $repository;
     private $session;
 
     public function __construct(SessionInterface $session, ArticleRepository $repository)
     {
         $this->session = $session;
         $this->repository = $repository;
+    }
+
+    public function user()
+    {
     }
 
     public function detail()
@@ -28,8 +31,11 @@ class PageDetailController extends AbstractController
             ->getRepository(Article::class)
             ->findArticle($id);
 
+        // $user = $article[0]["id_user_id"];
+
         return $this->render('pages/pageDetail.html.twig', [
-            'article' => $article
+            'article' => $article,
+            // 'user' => $user
         ]);
         //  [
         //     '$id' => $id,
