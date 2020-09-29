@@ -6,6 +6,9 @@
     
 }
 
+header {
+  padding-top: 5rem;
+}
 
 
 .header {
@@ -22,11 +25,24 @@
 .search {
   border: none;
   text-align: left;
-  width: 90%;
+  display: flex;
+  width: 50%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-left: 10px;
+}
+
+.searchOptions {
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
 }
 
 .searchBar {
   align-self: center;
+  display: flex;
   width:30%;
   height: 30px;
   background-color: white;
@@ -36,6 +52,8 @@
   border-top-right-radius: 15px;
   text-align: right;
   align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .paddingh1 {

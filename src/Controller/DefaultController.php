@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
@@ -17,8 +18,8 @@ class DefaultController extends AbstractController
 
     public function index()
     {
-        if (isset($_GET['search'])) {
-            if (isset($_GET['expandSearch'])) {
+        if(isset($_GET['search'])){
+            if(isset($_GET['expandSearch'])){
                 /** @var Article $article */
                 $article = $this->getDoctrine()
                     ->getRepository(Article::class)
@@ -33,7 +34,7 @@ class DefaultController extends AbstractController
                 'article' => $article,
                 'previousSearch' => $_GET['search']
             ]);
-        } else {
+        }else{
             /** @var Article $article */
             $article = $this->getDoctrine()
                 ->getRepository(Article::class)
@@ -43,5 +44,6 @@ class DefaultController extends AbstractController
                 'previousSearch' => ''
             ]);
         }
+
     }
 }

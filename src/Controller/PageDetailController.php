@@ -30,6 +30,7 @@ class PageDetailController extends AbstractController
 
         return $this->render('pages/pageDetail.html.twig', [
             'article' => $article,
+            'previousSearch' => ''
         ]);
     }
 }

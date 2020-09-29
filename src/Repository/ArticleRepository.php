@@ -57,13 +57,21 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    public function findArticleByUserId($id)
+    public function searchArticle($search)
     {
         return $this->createQueryBuilder('article')
-            ->where('article.id_user= :id')
-            ->setParameter('id', $id)
+            ->where('article.titre LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->getQuery()
             ->getResult();
     }
+    public function searchArticleExpanded($search)
+    {
+        return $this->createQueryBuilder('article')
+            ->where('article.titre LIKE :search OR article.contenu LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

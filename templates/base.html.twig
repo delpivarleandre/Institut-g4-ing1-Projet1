@@ -12,12 +12,28 @@
         <header>
             <div class="header">
                 <a href="/"><img src="{{ asset('assets/logo.png') }}"></a>
-                <div class="searchBar"><input type="text" name="search" id="search" class="search" placeholder="Rechercher ici"><label for="search">🔎</label></div>
+                <form class="searchBar" method="get" id="searchForm">
+                    <input type="text" name="search" id="search" class="search" placeholder="Rechercher ici" value="{{previousSearch}}">
+                    <div class="searchOptions">
+                        <div>
+                            <input type="checkbox" id="expandSearch" name="expandSearch">
+                            <label for="expandSearch">chercher partout</label>
+                        </div>
+                        <label onClick='checkInputValue()' for="search">🔎</label>
+                    </div>
+                </form>
                 <div class="connection">connexion ici</div>
             </div>
         </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
-        
+        <script>
+            function checkInputValue() {
+                if(document.getElementById('search').value){
+                    event.preventDefault()
+                    document.forms[0].submit()
+                }
+            }
+        </script>
     </body>
 </html>
