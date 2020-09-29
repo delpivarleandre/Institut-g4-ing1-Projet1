@@ -6,12 +6,8 @@
     
 }
 
-header {
-  padding-top: 5rem;
-}
-
-
 .header {
+  z-index: 1000;
   width:100%;
   position: sticky;
   top:0px;
@@ -20,6 +16,11 @@ header {
   flex-direction: row;
   justify-content: space-between;
   background-color: #6a5650;
+  height: 4rem;
+}
+
+header {
+  padding-top: 8rem;
 }
 
 .search {
