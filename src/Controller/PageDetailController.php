@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PageDetailController extends AbstractController
@@ -16,9 +15,6 @@ class PageDetailController extends AbstractController
         $this->session = $session;
     }
 
-    public function user()
-    {
-    }
 
     public function detail()
     {
