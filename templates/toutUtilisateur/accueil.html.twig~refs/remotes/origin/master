@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<!-- TODO MediaQueries a faire  -->
+	<div class="container">
+		{% if article==[] %}
+			Aucun résultat (╯°□°）╯︵ ┻━┻
+		{% else %}
+			<div class="container-flex">
+
+				{%for art in article %}
+					<div class="card" style="width: 30%; margin-bottom: 2%;">
+						<div class="card-header">
+							<h5>
+								<strong>{{ art.getTitre() }}</strong>
+							</h5>
+						</div>
+						<div class="card-body" style="padding-top: 3px">
+							<small>{{ art.getDateCrea() |date('Y-m-d H:i:s')}}</small>
+							<p class="card-text">{{ art.getContenu() }}</p>
+							<a href="pageDetail/?id={{ art.getId }}" class="btn btn-outline-primary">Voir plus</a>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+		{% endif %}
+	</div>
+</div>{% endblock %}

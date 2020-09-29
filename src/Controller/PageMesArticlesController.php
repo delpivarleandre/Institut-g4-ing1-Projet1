@@ -28,7 +28,7 @@ class PageMesArticlesController extends AbstractController
             ->findArticleByUserId($session_test);
 
 
-        return $this->render('pages/pageMesArticles.html.twig', [
+        return $this->render('article/voirArticles.html.twig', [
             'mes_articles' => $mes_articles,
         ]);
     }
@@ -47,6 +47,5 @@ class PageMesArticlesController extends AbstractController
 
 
         return $this->redirectToRoute('mes_articles');
-        // return new redirectToRoute("pages/pageMesArticles.html.twig");
     }
 }

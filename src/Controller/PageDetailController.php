@@ -28,7 +28,7 @@ class PageDetailController extends AbstractController
             ->findArticle($id);
 
 
-        return $this->render('pages/pageDetail.html.twig', [
+        return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
             'article' => $article,
             'previousSearch' => ''
         ]);

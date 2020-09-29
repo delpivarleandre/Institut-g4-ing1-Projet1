@@ -3,7 +3,7 @@ index:
    controller: App\Controller\DefaultController::index
    
 page_detaillée:
-    path: /pageDetail
+    path: /detailArticle
     controller: App\Controller\PageDetailController::detail
 
 creer_profil:

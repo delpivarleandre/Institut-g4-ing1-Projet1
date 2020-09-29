@@ -29,7 +29,7 @@ class DefaultController extends AbstractController
                     ->getRepository(Article::class)
                     ->searchArticle($_GET['search']);
             }
-            return $this->render('pages/pageAccueil.html.twig', [
+            return $this->render('toutUtilisateur/accueil.html.twig', [
                 'article' => $article,
                 'previousSearch' => $_GET['search']
             ]);
@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
             $article = $this->getDoctrine()
                 ->getRepository(Article::class)
                 ->findAll();
-            return $this->render('pages/pageAccueil.html.twig', [
+            return $this->render('toutUtilisateur/accueil.html.twig', [
                 'article' => $article,
                 'previousSearch' => ''
             ]);
