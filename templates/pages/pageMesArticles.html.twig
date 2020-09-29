@@ -3,19 +3,67 @@
 	Mes articles
 {% endblock %}
 {% block body %}
-	<div class="container">
-		<div class="jumbotron mt-5">
-			<div class="col-sm-8 mx-auto">
-				<h1 class="text-center">{{ article[0].titre }}</h1>
-			</div>
-			<br>
-			<small>{{ article[0].dateModif |date('Y-m-d H:i:s') }}</small>
-			<div style="text-align: center;">
-				<p>{{ article[0].contenu }}</p>
-			</div>
-			<small>{{ article[0].getIdUser().nom }}
-				{{ article[0].getIdUser().prenom }}</small>
-
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
 		</div>
-	</div>
-{% endblock %}
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
+	<div class="container">
+		<h1 class="paddingh1">Voici vos articles crées</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Titre</th>
+					<th scope="col">Date de création</th>
+					<th scope="col">Date de modification</th>
+					<th class="action">&nbsp;</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for art in mes_articles %}
+					<tr>
+						<td>
+							<U>
+								<a href="pageDetail/?id={{ art.getId }}" style="color:black;">
+									{{ art.getTitre() }}
+								</a>
+							</U>
+						</td>
+						<td>{{ art.getDateCrea() |date('Y-m-d H:i:s') }}</td>
+						<td>{{ art.getDateModif() |date('Y-m-d H:i:s') }}</td>
+						<td
+							class="buttonAlign">
+							<!-- TODO Voir pour edit article  -->
+							<div class="button">
+
+								<a style="color:black;" href="mesArticles/?id={{ art.getId() }}">
+									<svg style="width:24px;height:24px" viewbox="0 0 24 24">
+										<path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"/>
+									</svg>
+								</a>
+
+								<a style="color:red;">
+									<form method="post" action="{{ path('supp_article', {id: art.id}) }}" style="display: inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer cette article ?')">
+										<input type="hidden" name="_method" value="DELETE">
+										<input type="hidden" name="_token" value="{{csrf_token('delete' ~ art.id)}}">
+										<button class="deleteArticle">
+											<svg style="width:24px;height:24px" viewbox="0 0 24 24">
+												<path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/>
+											</svg>
+										</button>
+									</form>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</td>
+			</tbody>
+		</tr>
+	{% endfor %}
+</tbody></table></div>{% endblock %}

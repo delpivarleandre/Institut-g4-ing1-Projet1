@@ -9,3 +9,7 @@ page_detaillée:
 mes_articles:
     path: /mesArticles
     controller: App\Controller\PageMesArticlesController::mesArticles
+
+supp_article:
+    path: /mesArticles/delete/{id}
+    controller: App\Controller\PageMesArticlesController::supprimerArticle

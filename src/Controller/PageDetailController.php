@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class PageDetailController extends AbstractController
 {
@@ -16,11 +18,11 @@ class PageDetailController extends AbstractController
     }
 
 
-    public function detail()
+    public function detail(Request $request)
     {
-        $id = $_GET['id'];
+        $id = $request->get('id');
 
-        /** @var Artcile $article */
+        /** @var Article $article */
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findArticle($id);

@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PageMesArticlesController extends AbstractController
@@ -16,22 +17,36 @@ class PageMesArticlesController extends AbstractController
         $this->session = $session;
     }
 
-    public function user()
-    {
-    }
-
+    // AFFICHER TOUT MES ARTICLES
     public function mesArticles()
     {
-        $id = $_GET['id'];
+        $session_test = 1;
 
-        /** @var Artcile $article */
-        $article = $this->getDoctrine()
+        /** @var Article $mes_articles */
+        $mes_articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findArticle($id);
+            ->findArticleByUserId($session_test);
 
 
-        return $this->render('pages/pageDetail.html.twig', [
-            'article' => $article,
+        return $this->render('pages/pageMesArticles.html.twig', [
+            'mes_articles' => $mes_articles,
         ]);
+    }
+
+    // SUPPRIMER MON ARTICLE EN QUESTION
+    public function supprimerArticle(Request $request, Article $article)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+
+            $entityManager->remove($article);
+            $entityManager->flush();
+            $this->addFlash('success', "L'article " . $article->getTitre() . ' à bien été supprimée.');
+        }
+
+
+
+        return $this->redirectToRoute('mes_articles');
+        // return new redirectToRoute("pages/pageMesArticles.html.twig");
     }
 }

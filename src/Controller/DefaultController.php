@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
 
 class DefaultController extends AbstractController
 {
@@ -19,13 +17,31 @@ class DefaultController extends AbstractController
 
     public function index()
     {
-        /** @var Artcile $article */
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
-
-        return $this->render('pages/pageAccueil.html.twig', [
-            'article' => $article
-        ]);
+        if (isset($_GET['search'])) {
+            if (isset($_GET['expandSearch'])) {
+                /** @var Article $article */
+                $article = $this->getDoctrine()
+                    ->getRepository(Article::class)
+                    ->searchArticleExpanded($_GET['search']);
+            } else {
+                /** @var Article $article */
+                $article = $this->getDoctrine()
+                    ->getRepository(Article::class)
+                    ->searchArticle($_GET['search']);
+            }
+            return $this->render('pages/pageAccueil.html.twig', [
+                'article' => $article,
+                'previousSearch' => $_GET['search']
+            ]);
+        } else {
+            /** @var Article $article */
+            $article = $this->getDoctrine()
+                ->getRepository(Article::class)
+                ->findAll();
+            return $this->render('pages/pageAccueil.html.twig', [
+                'article' => $article,
+                'previousSearch' => ''
+            ]);
+        }
     }
 }
