@@ -5,3 +5,7 @@ index:
 page_detaillée:
     path: /pageDetail
     controller: App\Controller\PageDetailController::detail
+
+mes_articles:
+    path: /mesArticles
+    controller: App\Controller\PageMesArticlesController::mesArticles

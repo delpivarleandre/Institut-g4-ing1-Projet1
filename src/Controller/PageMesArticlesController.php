@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class PageDetailController extends AbstractController
+class PageMesArticlesController extends AbstractController
 {
     private $session;
 
@@ -20,7 +20,7 @@ class PageDetailController extends AbstractController
     {
     }
 
-    public function detail()
+    public function mesArticles()
     {
         $id = $_GET['id'];
 
