@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    const GRADE = [
+        0 => 'Utilisateur',
+        1 => 'Modérateur',
+        2 => 'Administrateur'
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -43,6 +48,11 @@ class User
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="id_user")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private $grade = 0;
 
     public function __construct()
     {
@@ -129,6 +139,23 @@ class User
                 $article->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGrade(): ?int
+    {
+        return $this->grade;
+    }
+
+    public function getGradeType()
+    {
+        return self::GRADE[$this->grade];
+    }
+
+    public function setGrade(int $grade): self
+    {
+        $this->grade = $grade;
 
         return $this;
     }

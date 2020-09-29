@@ -6,13 +6,11 @@
     
 }
 
-header {
-  padding-top: 3rem;
-}
+
 
 .header {
   width:100%;
-  position: fixed;
+  position: sticky;
   top:0px;
   left:0px;
   display: flex;
@@ -38,4 +36,19 @@ header {
   border-top-right-radius: 15px;
   text-align: right;
   align-items: flex-start;
+}
+
+.paddingh1 {
+  padding: 1.6rem;
+}
+
+.buttonAlign {
+  text-align: right;
+}
+
+.deleteArticle {
+  color: red;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
 }
