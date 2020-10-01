@@ -12,8 +12,8 @@
         <header>
             <div class="header">
                 <a href="/"><img src="{{ asset('assets/logo.png') }}"></a>
-                <form class="searchBar" method="get" id="searchForm">
-                    <input type="text" name="search" id="search" class="search" placeholder="Rechercher ici" value="{{previousSearch}}">
+                <form class="searchBar" method="get" action="/" id="searchForm">
+                    <input type="text" name="search" id="search" class="search" placeholder="Rechercher ici" value="{{previousSearch|default('')}}">
                     <div class="searchOptions">
                         <div>
                             <input type="checkbox" id="expandSearch" name="expandSearch">

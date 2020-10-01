@@ -39,8 +39,7 @@ class DefaultController extends AbstractController
                 ->getRepository(Article::class)
                 ->findAll();
             return $this->render('toutUtilisateur/accueil.html.twig', [
-                'article' => $article,
-                'previousSearch' => ''
+                'article' => $article
             ]);
         }
 

@@ -29,8 +29,7 @@ class PageDetailController extends AbstractController
 
 
         return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
-            'article' => $article,
-            'previousSearch' => ''
+            'article' => $article
         ]);
     }
 }
