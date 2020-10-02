@@ -18,11 +18,12 @@ class PageDetailController extends AbstractController
         $this->session = $session;
     }
 
-
+    // GET DETAIL ARTICLE EN FONCTION DE L'ID
     public function detail(Request $request)
     {
         $id = $request->get('id');
 
+        // SELECT * WHERE ID = ID CHOISI
         /** @var Article $article */
         $article = $this->getDoctrine()
             ->getRepository(Article::class)

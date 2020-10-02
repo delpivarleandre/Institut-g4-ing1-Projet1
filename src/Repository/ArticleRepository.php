@@ -59,6 +59,15 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findArticleByUserId($id)
+    {
+        return $this->createQueryBuilder('article')
+            ->where('article.id_user= :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
     public function searchArticle($search)
     {
         return $this->createQueryBuilder('article')
@@ -79,5 +88,4 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 }

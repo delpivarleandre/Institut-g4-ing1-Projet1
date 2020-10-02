@@ -6,6 +6,8 @@ page_detaillée:
     path: /detailArticle
     controller: App\Controller\PageDetailController::detail
 
+
+# ROUTE PROFIL USER
 creer_profil:
    path: /creerprofil
    controller: App\Controller\UserController::create
@@ -26,6 +28,8 @@ admin_user_delete:
    path: /admin/user/delete/{id}
    controller: App\Controller\UserController::delete
 
+
+# ROUTE ARTICLES DE L'USER CONNECTÉ 
 mes_articles:
     path: /mesArticles
     controller: App\Controller\PageMesArticlesController::mesArticles
@@ -33,3 +37,11 @@ mes_articles:
 supp_article:
     path: /mesArticles/delete/{id}
     controller: App\Controller\PageMesArticlesController::supprimerArticle
+
+ajouter_article:
+    path: /ajouterArticles/
+    controller: App\Controller\PageMesArticlesController::ajouterArticle
+
+modifier_article:
+    path: /modifierArticle/{id}
+    controller: App\Controller\PageMesArticlesController::modifierArticle

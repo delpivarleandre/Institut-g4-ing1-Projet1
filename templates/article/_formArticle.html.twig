@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+{{ form_row(form.titre) }}
+{{ form_row(form.contenu) }}
+{{ form_widget(form) }}
+<br>
+<button class="btn btn-outline-primary">{{ button|default('Enregistrer') }}</button>
+{{ form_end(form) }}
