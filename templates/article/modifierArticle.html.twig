@@ -6,6 +6,17 @@
 
 	<div class="container">
 		<div class="jumbotron mt-4">
+			<div class="container-flex padding-div">
+				{% for y in tag_article %}
+					{{ y.getIdArticle() }}
+				{% endfor %}
+				{% for i in les_tags %}
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<label class="form-check-label" for="exampleCheck1">{{ i.tag }}</label>
+					</div>
+				{% endfor %}
+			</div>
 			<fieldset>
 				<legend>Modifier l'article</legend>
 				{{ include('article/_formArticle.html.twig', {form: form, button: 'Modifier'})}}

@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-
-use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\Article;
+use App\Entity\TagArticle;
+use App\Entity\Tag;
 use App\Form\ArticleType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,6 +74,7 @@ class PageMesArticlesController extends AbstractController
 
         return $this->render('article/creeArticle.html.twig', [
             'article' => $article,
+            'les_tags' => $this->lesTags(),
             'form' => $form->createView()
         ]);
     }
@@ -82,8 +82,15 @@ class PageMesArticlesController extends AbstractController
     //EDIT L'ARTICLE CHOISI
     public function modifierArticle(Article $article, Request $request)
     {
+        $array_tab = $request->get('id');
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        // SELECT * WHERE ID USER = ID USER CONNECTÉ        
+        /** @var TagArticle $tag_article */
+        $tag_article = $this->getDoctrine()
+            ->getRepository(TagArticle::class)
+            ->findTagByArticle($array_tab);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setDateModif(new DateTime());
@@ -93,8 +100,22 @@ class PageMesArticlesController extends AbstractController
         }
 
         return $this->render('article/modifierArticle.html.twig', [
+            'tag_article' => $tag_article,
             'article' => $article,
+            'les_tags' => $this->lesTags(),
             'form' => $form->createView()
         ]);
+    }
+
+
+    public function lesTags()
+    {
+        // SELECT * TAG
+        /** @var Tag $les_tags */
+        $les_tags = $this->getDoctrine()
+            ->getRepository(Tag::class)
+            ->findAll();
+
+        return $les_tags;
     }
 }

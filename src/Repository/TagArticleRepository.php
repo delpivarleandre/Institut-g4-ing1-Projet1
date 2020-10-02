@@ -47,4 +47,12 @@ class TagArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findTagByArticle($id)
+    {
+        return $this->createQueryBuilder('tag_article')
+            ->where('tag_article.id_article= :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

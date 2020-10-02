@@ -3,7 +3,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    
 }
 
 .header {
@@ -126,4 +125,16 @@ header {
   border: none;
   box-shadow: none;
   cursor: pointer;
+}
+
+.jumbotron {
+  padding: 2rem 2rem !important;
+}
+
+.padding-div {
+  padding: 1rem;
+}
+
+.form-check {
+  padding-left: 2rem;
 }

@@ -68,23 +68,25 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     public function searchArticle($search)
     {
         return $this->createQueryBuilder('article')
             ->where('article.titre LIKE :search OR t.tag LIKE :search')
-            ->leftJoin(tagArticle::class,'j','with','article.id = j.id_article')
-            ->leftJoin(tag::class,'t','with','j.id_tag = t.id')
-            ->setParameter('search', '%'.$search.'%')
+            ->leftJoin(tagArticle::class, 'j', 'with', 'article.id = j.id_article')
+            ->leftJoin(tag::class, 't', 'with', 'j.id_tag = t.id')
+            ->setParameter('search', '%' . $search . '%')
             ->getQuery()
             ->getResult();
     }
+
     public function searchArticleExpanded($search)
     {
         return $this->createQueryBuilder('article')
             ->where('article.titre LIKE :search OR article.contenu LIKE :search OR t.tag LIKE :search')
-            ->leftJoin(tagArticle::class,'j','with','article.id = j.id_article')
-            ->leftJoin(tag::class,'t','with','j.id_tag = t.id')
-            ->setParameter('search', '%'.$search.'%')
+            ->leftJoin(tagArticle::class, 'j', 'with', 'article.id = j.id_article')
+            ->leftJoin(tag::class, 't', 'with', 'j.id_tag = t.id')
+            ->setParameter('search', '%' . $search . '%')
             ->getQuery()
             ->getResult();
     }
