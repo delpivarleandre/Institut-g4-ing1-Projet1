@@ -1,5 +1,9 @@
 {% extends 'toutUtilisateur/accueil.html.twig' %}
 {% block connexion %}
-  <div class="login">connexion</div>
-  <div class="signup">inscription</div>
+  {% if connected %}
+    <img class="avatar"></img>
+  {% else %}
+    <div class="login">connexion</div>
+    <div class="signup">inscription</div>
+  {% endif %}
 {% endblock %}

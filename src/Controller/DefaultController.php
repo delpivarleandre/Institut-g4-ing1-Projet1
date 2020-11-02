@@ -17,6 +17,9 @@ class DefaultController extends AbstractController
 
     public function index()
     {
+        $params = [];
+        //TODO connection backend
+        $params['connected'] = false;
         if(isset($_GET['search'])){
             if(isset($_GET['expandSearch'])){
                 /** @var Article $article */
@@ -29,19 +32,15 @@ class DefaultController extends AbstractController
                     ->getRepository(Article::class)
                     ->searchArticle($_GET['search']);
             }
-            return $this->render('toutUtilisateur/connexion.html.twig', [
-                'article' => $article,
-                'previousSearch' => $_GET['search']
-            ]);
+            $params['article'] = $article;
+            $params['previousSearch'] = $_GET['search'];
         }else{
             /** @var Article $article */
             $article = $this->getDoctrine()
                 ->getRepository(Article::class)
                 ->findAll();
-            return $this->render('toutUtilisateur/connexion.html.twig', [
-                'article' => $article
-            ]);
+            $params['article'] = $article;
         }
-
+        return $this->render('toutUtilisateur/connexion.html.twig', $params);
     }
 }
