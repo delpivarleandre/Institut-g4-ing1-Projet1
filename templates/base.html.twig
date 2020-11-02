@@ -22,7 +22,7 @@
                         <label onClick='checkInputValue()' for="search">🔎</label>
                     </div>
                 </form>
-                <div class="connection">connexion ici</div>
+                <div class="connection">{% block connexion %}{% endblock %}</div>
             </div>
         </header>
         {% block body %}{% endblock %}
