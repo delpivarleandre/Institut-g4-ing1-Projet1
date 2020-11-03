@@ -22,7 +22,7 @@
                         <label onClick='checkInputValue()' for="search">🔎</label>
                     </div>
                 </form>
-                <div class="connection">{% block connexion %}{% endblock %}</div>
+                <div class="connection">{% include "toutUtilisateur/connexion.html.twig" with {'connected' : connected} %}</div>
             </div>
         </header>
         {% block body %}{% endblock %}

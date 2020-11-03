@@ -1,9 +1,6 @@
-{% extends 'toutUtilisateur/accueil.html.twig' %}
-{% block connexion %}
-  {% if connected %}
+{% if connected %}
     <div class="logout">déconnexion</div>
   {% else %}
     <div class="login">connexion</div>
     <div class="signup">inscription</div>
-  {% endif %}
-{% endblock %}
+{% endif %}

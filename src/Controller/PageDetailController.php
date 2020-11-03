@@ -45,7 +45,8 @@ class PageDetailController extends AbstractController
 
         return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
             'article' => $article,
-            'comments' => $commentaires
+            'comments' => $commentaires,
+            'connected' => true,
         ]);
     }
 }

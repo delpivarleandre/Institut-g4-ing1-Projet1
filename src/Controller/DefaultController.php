@@ -41,6 +41,6 @@ class DefaultController extends AbstractController
                 ->findAll();
             $params['article'] = $article;
         }
-        return $this->render('toutUtilisateur/connexion.html.twig', $params);
+        return $this->render('toutUtilisateur/accueil.html.twig', $params);
     }
 }
