@@ -17,5 +17,24 @@
 				{{ article[0].getIdUser().prenom }}</small>
 
 		</div>
+		<!-- if islogged-->
+		<div class="jumbotron mt-2">
+			<form method="post">
+				<input type="text" name="comment" placeholder="commentez ici!">
+				<button>poster le commentaire</button>
+			</form>
+		</div>
+		{% for comment in comments %}
+			<div class="jumbotron mt-2">
+				<div>
+					{{comment.contenu}}
+				</div>
+				<small>
+					<br>
+					{{ comment.getIdUser().nom }}
+					{{ comment.getIdUser().prenom }}
+				</small>
+			</div>
+		{% endfor %}
 	</div>
 {% endblock %}
