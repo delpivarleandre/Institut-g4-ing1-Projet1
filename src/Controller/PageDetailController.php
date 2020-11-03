@@ -29,6 +29,25 @@ class PageDetailController extends AbstractController
             ->getRepository(Article::class)
             ->findArticle($id);
 
+        $commentaires = $this->getDoctrine()
+            ->getRepository(Commentaire::class)
+            ->getCommentByArticleId($id);
+        dump($article);
+        return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
+            'article' => $article,
+            'comments' => $commentaires
+        ]);
+    }
+    public function comment(Request $request)
+    {
+        $id = $request->get('id');
+
+        // SELECT * WHERE ID = ID CHOISI
+        /** @var Article $article */
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findArticle($id);
+
         if(isset($_POST['comment'])){
             if(!empty($_POST['comment'])){
                 $entityManager = $this->getDoctrine()->getManager();
@@ -42,13 +61,6 @@ class PageDetailController extends AbstractController
             }
         }
 
-        $commentaires = $this->getDoctrine()
-            ->getRepository(Commentaire::class)
-            ->getCommentByArticleId($id);
-
-        return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
-            'article' => $article,
-            'comments' => $commentaires
-        ]);
+        return $this->redirectToRoute('page_detaillée', ['id'=>$id]);
     }
 }

@@ -19,7 +19,7 @@
 		</div>
 		{% if app.user %}
 			<div class="jumbotron mt-2">
-				<form method="post">
+				<form method="post" action="/commentArticle/{{article[0].id}}">
 					<input type="text" name="comment" placeholder="commentez ici!">
 					<button>poster le commentaire</button>
 				</form>

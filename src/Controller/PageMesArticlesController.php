@@ -58,7 +58,7 @@ class PageMesArticlesController extends AbstractController
     }
 
     // CREER UN ARTICLE 
-    public function ajouterArticle(Request $request, TagRepository $tr): Response
+    public function ajouterArticle(Request $request,TagRepository $tr): Response
     {
         $article = new Article();
         $tag_article = new TagArticle();

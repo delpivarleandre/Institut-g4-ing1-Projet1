@@ -5,6 +5,9 @@ index:
 page_detaillée:
     path: /detailArticle
     controller: App\Controller\PageDetailController::detail
+commenter_article:
+    path: /commentArticle/{id}
+    controller: App\Controller\PageDetailController::comment
 
 
 # ROUTE PROFIL USER
