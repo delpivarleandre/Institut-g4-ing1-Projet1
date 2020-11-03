@@ -54,7 +54,7 @@ class PageMesArticlesController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', "L'article " . $article->getTitre() . ' à bien été supprimée.');
         }
-        return $this->render('article/voirArticles.html.twig');
+        return $this->redirectToRoute('mes_articles');
     }
 
     // CREER UN ARTICLE 
