@@ -45,4 +45,5 @@ ajouter_article:
 modifier_article:
     path: /modifierArticle/{id}
     controller: App\Controller\PageMesArticlesController::modifierArticle
-
+    requirements: 
+      id: '\d+'

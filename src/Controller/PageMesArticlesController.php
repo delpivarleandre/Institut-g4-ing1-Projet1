@@ -107,15 +107,17 @@ class PageMesArticlesController extends AbstractController
             $article->setTitre($array_post_article_tag["titre"]);
             $article->setContenu($array_post_article_tag["contenu"]);
             $article->setDateModif(new DateTime());
+            $this->em->persist($article);
+            $this->em->flush();
             foreach ($array_post_article_tag["tag"] as $id => $value) {
                 $tag_article = new TagArticle;
                 $tag_article->setIdArticle($article);
                 $tag_article->setIdTag($tr->findOneBy(['id' => $id]));
                 // $article->addTagArticle($tag_article);
                 $this->em->persist($tag_article);
+                $this->em->flush();
             }
-            $this->em->persist($article);
-            $this->em->flush();
+
 
             $this->addFlash('success', 'Votre article a été modifié avec succès');
             return $this->redirectToRoute('mes_articles');
