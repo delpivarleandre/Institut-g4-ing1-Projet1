@@ -4,21 +4,27 @@
 {% block title 'Créer votre article' %}
 
 {% block body %}
-
+<form method="POST" action="">
 	<div class="container">
 		<div class="jumbotron mt-4">
 			<div class="container-flex padding-div">
 				{% for i in les_tags %}
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<input type="checkbox" class="form-check-input input" name="'tag['{{ i.id }}']'">
 						<label class="form-check-label" for="exampleCheck1">{{ i.tag }}</label>
 					</div>
 				{% endfor %}
 			</div>
 			<fieldset>
 				<legend>Ajouter un nouvel article</legend>
-				{{ include('article/_formArticle.html.twig', {form: form, button: 'Ajouter'})}}
+				<br>
+				<input type="text" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1" id="titre" name="titre">
+				<br>
+				<textarea class="form-control" id="contenu" name="contenu" rows="3" placeholder="Contenu"></textarea>
+				<br>
+				<button type="submit" class="btn btn-outline-success">Ajouter</button>
 			</fieldset>
 		</div>
 	</div>
+</form>
 {% endblock %}

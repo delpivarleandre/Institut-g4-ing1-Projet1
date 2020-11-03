@@ -1,26 +1,30 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title 'Modifier votre article' %}
+
+{% block title 'Créer votre article' %}
 
 {% block body %}
-
+<form method="POST" action="">
 	<div class="container">
 		<div class="jumbotron mt-4">
 			<div class="container-flex padding-div">
-				{% for y in tag_article %}
-					{{ y.getIdArticle() }}
-				{% endfor %}
 				{% for i in les_tags %}
-					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">{{ i.tag }}</label>
-					</div>
+						<div class="form-check">
+							<input type="checkbox" {% if i in article.getTagArticles %}  checked="checked" {% endif %} value="{{ i.id }}" class="form-check-input input" name="tag['{{ i.id }}']'">
+							<label class="form-check-label" for="exampleCheck1">{{ i.tag }}</label>
+						</div>		
 				{% endfor %}
 			</div>
 			<fieldset>
-				<legend>Modifier l'article</legend>
-				{{ include('article/_formArticle.html.twig', {form: form, button: 'Modifier'})}}
+				<legend>Ajouter un nouvel article</legend>
+				<br>	
+				<input type="text" class="form-control" placeholder="Titre" value={{ article.getTitre() }} aria-label="Titre" aria-describedby="basic-addon1" id="titre" name="titre">
+				<br>
+				<textarea class="form-control" id="contenu" name="contenu" rows="3" placeholder="Contenu">{{ article.getContenu() }}</textarea>
+				<br>
+				<button type="submit" class="btn btn-outline-primary">Modifier</button>
 			</fieldset>
 		</div>
 	</div>
+</form>
 {% endblock %}
