@@ -27,21 +27,23 @@ class PageDetailController extends AbstractController
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findArticle($id);
-        $commentaires = $this->getDoctrine()
-            ->getRepository(Commentaire::class)
-            ->getCommentByArticleId($id);
+
         if(isset($_POST['comment'])){
             if(!empty($_POST['comment'])){
                 $entityManager = $this->getDoctrine()->getManager();
 
                 $commentaire = new Commentaire();
-                //$commentaire->setIdUser($UserId);
+                $commentaire->setIdUser($this->getUser());
                 $commentaire->setIdArticle($article[0]);
                 $commentaire->setContenu($_POST['comment']);
                 $entityManager->persist($commentaire);
                 $entityManager->flush();
             }
         }
+
+        $commentaires = $this->getDoctrine()
+            ->getRepository(Commentaire::class)
+            ->getCommentByArticleId($id);
 
         return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
             'article' => $article,
