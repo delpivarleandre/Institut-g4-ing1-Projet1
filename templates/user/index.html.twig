@@ -1,48 +1,43 @@
-{# empty Twig template #}
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title 'Gérer les biens' %}
+{% block title %}User index{% endblock %}
 
-    {% block body %}
+{% block body %}
+    <h1>User index</h1>
 
-        <div class="container mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-            <h1>Gérer les biens</h1>
-
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-            {%endfor%}
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nom d'utilisateur</th>
-                        <th>Grade</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.gradeType }}</td>
-                            <td>
-                                <a href="{{ path('admin_edit_user', {id: user.id}) }}" class="btn btn-secondary">Editer</a>
-                                <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" style="display: inline-block" 
-                                        onsubmit="return confirm('Voulez-vous vraiment supprimmer cet utilisateur')">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{csrf_token('delete' ~ user.id)}}">
-                                    <button class="btn btn-danger">Supprimmer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-
-
-    {% endblock %}{# empty Twig template #}
+    <a href="{{ path('user_new') }}">Create new</a>
+{% endblock %}
