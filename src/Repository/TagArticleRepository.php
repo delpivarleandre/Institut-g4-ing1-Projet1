@@ -55,4 +55,14 @@ class TagArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function deleteAllbyArticle($id)
+    {
+        return $this->createQueryBuilder('tag_article')
+            ->delete()
+            ->where('tag_article.id_article= :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

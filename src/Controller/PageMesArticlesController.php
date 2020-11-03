@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\TagArticle;
 use App\Entity\Tag;
 use App\Form\ArticleType;
+use App\Repository\TagArticleRepository;
 use App\Repository\TagRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,7 +58,7 @@ class PageMesArticlesController extends AbstractController
     }
 
     // CREER UN ARTICLE 
-    public function ajouterArticle(Request $request): Response
+    public function ajouterArticle(Request $request, TagRepository $tr): Response
     {
         $article = new Article();
         $tag_article = new TagArticle();
@@ -71,21 +72,15 @@ class PageMesArticlesController extends AbstractController
             $article->setDateModif(new DateTime());
             $this->em->persist($article);
             $this->em->flush();
-            $id_article = $article->getId();
             foreach ($array_post_article_tag["tag"] as $id => $value) {
-                $tag_article->setIdArticle($id_article);
-                $tag_article->setIdTag($id);
+                $tag_article->setIdArticle($article);
+                $tag_article->setIdTag($tr->findOneBy(['id' => $id]));
                 $this->em->persist($tag_article);
                 $this->em->flush();
             }
             $this->addFlash('success', 'Votre article a été créer avec succès');
-            return $this->redirectToRoute('article/voirArticles.html.twig');
+            return $this->redirectToRoute('mes_articles');
         }
-
-        return $this->render('article/creeArticle.html.twig', [
-            'article' => $article,
-            'les_tags' => $this->lesTags(),
-        ]);
     }
 
     public function lesTags()
@@ -98,10 +93,10 @@ class PageMesArticlesController extends AbstractController
         return $les_tags;
     }
     //EDIT L'ARTICLE CHOISI
-    public function modifierArticle(Article $article, Request $request, TagRepository $tr)
+    public function modifierArticle(Article $article, Request $request, TagRepository $tr, TagArticleRepository $tar)
     {
+
         $array_post_article_tag = $_POST;
-        var_dump($array_post_article_tag);
         if ($array_post_article_tag) {
 
             $article->setTitre($array_post_article_tag["titre"]);
@@ -109,11 +104,13 @@ class PageMesArticlesController extends AbstractController
             $article->setDateModif(new DateTime());
             $this->em->persist($article);
             $this->em->flush();
+            $tar->deleteAllbyArticle($article->getid());
+
             foreach ($array_post_article_tag["tag"] as $id => $value) {
                 $tag_article = new TagArticle;
                 $tag_article->setIdArticle($article);
                 $tag_article->setIdTag($tr->findOneBy(['id' => $id]));
-                // $article->addTagArticle($tag_article);
+                var_dump($tr->findOneBy(['id' => $id]));
                 $this->em->persist($tag_article);
                 $this->em->flush();
             }
@@ -122,9 +119,14 @@ class PageMesArticlesController extends AbstractController
             $this->addFlash('success', 'Votre article a été modifié avec succès');
             return $this->redirectToRoute('mes_articles');
         }
-        var_dump($this->lesTags());
+
+        $checked = [];
+        foreach ($article->getTagArticles() as $tag_article) {
+            $checked[] = $tag_article->getIdTag();
+        }
         return $this->render('article/modifierArticle.html.twig', [
             'article' => $article,
+            'checked' => $checked,
             'les_tags' => $this->lesTags(),
         ]);
     }

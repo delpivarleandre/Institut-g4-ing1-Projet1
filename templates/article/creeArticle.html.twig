@@ -10,7 +10,7 @@
 			<div class="container-flex padding-div">
 				{% for i in les_tags %}
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input input" name="'tag['{{ i.id }}']'">
+						<input type="checkbox" class="form-check-input input" value="{{ i.id }}" name="tag['{{ i.id }}']">
 						<label class="form-check-label" for="exampleCheck1">{{ i.tag }}</label>
 					</div>
 				{% endfor %}
