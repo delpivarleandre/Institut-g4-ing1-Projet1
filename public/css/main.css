@@ -78,6 +78,21 @@ header {
   margin-right: 5%;
   text-align: center;
 }
+
+.logout {
+  align-self: center;
+  display: flexbox;
+  width:55%;
+  height: 30px;
+  background-color: red;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-right: 5%;
+  text-align: center;
+}
+
 .signup {
   align-self: center;
   display: flexbox;
