@@ -19,7 +19,6 @@ class DefaultController extends AbstractController
     {
         $params = [];
         //TODO connection backend
-        $params['connected'] = false;
         if(isset($_GET['search'])){
             if(isset($_GET['expandSearch'])){
                 /** @var Article $article */

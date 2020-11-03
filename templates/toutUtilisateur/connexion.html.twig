@@ -1,6 +1,6 @@
-{% if connected %}
-    <div class="logout">déconnexion</div>
+{% if app.user %}
+    <a href="/logout" class="logout">déconnexion</a>
   {% else %}
-    <div class="login">connexion</div>
-    <div class="signup">inscription</div>
+    <a href="/login" class="login">connexion</a>
+    <a href="/register" class="signup">inscription</a>
 {% endif %}
