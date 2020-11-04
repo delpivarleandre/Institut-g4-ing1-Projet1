@@ -1,6 +1,6 @@
 {% if app.user %}
-    <a href="/logout" class="logout">déconnexion</a>
+    <a href="/logout" class="btn btn-danger">déconnexion</a>
   {% else %}
-    <a href="/login" class="login">connexion</a>
-    <a href="/register" class="signup">inscription</a>
+    <a href="/login" class="btn btn-primary">connexion</a>
+    <a href="/register" class="btn btn-info">inscription</a>
 {% endif %}
