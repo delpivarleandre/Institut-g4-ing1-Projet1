@@ -15,12 +15,11 @@
 			</div>
 			<small>{{ article[0].getIdUser().nom }}
 				{{ article[0].getIdUser().prenom }}</small>
-
 		</div>
 		{% if app.user %}
 			<div class="jumbotron mt-2">
 				<form method="post" action="/commentArticle/{{article[0].id}}">
-					<textarea class="form-control" aria-label="With textarea"></textarea>
+					<textarea class="form-control" aria-label="With textarea" name='comment'></textarea>
 					<button class="btn btn-secondary">poster le commentaire</button>
 				</form>
 			</div>

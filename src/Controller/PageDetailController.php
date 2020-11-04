@@ -47,7 +47,6 @@ class PageDetailController extends AbstractController
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findArticle($id);
-
         if(isset($_POST['comment'])){
             if(!empty($_POST['comment'])){
                 $entityManager = $this->getDoctrine()->getManager();

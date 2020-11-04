@@ -80,6 +80,11 @@ class PageMesArticlesController extends AbstractController
             }
             $this->addFlash('success', 'Votre article a été créer avec succès');
             return $this->redirectToRoute('mes_articles');
+        } else {
+            return $this->render('article/creeArticle.html.twig', [
+                'article' => $article,
+                'les_tags' => $this->lesTags(),
+            ]);
         }
     }
 
