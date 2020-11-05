@@ -32,7 +32,6 @@ class PageDetailController extends AbstractController
         $commentaires = $this->getDoctrine()
             ->getRepository(Commentaire::class)
             ->getCommentByArticleId($id);
-        dump($article);
         return $this->render('toutUtilisateur/detailArticleSelection.html.twig', [
             'article' => $article,
             'comments' => $commentaires

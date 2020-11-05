@@ -18,9 +18,9 @@
 		</div>
 		{% if app.user %}
 			<div class="jumbotron mt-2">
-				<form method="post" action="/commentArticle/{{article[0].id}}">
+				<form method="post" action="{{ path('commenter_article',{id:article[0].id}) }}">
 					<textarea class="form-control" aria-label="With textarea" name='comment'></textarea>
-					<button class="btn btn-secondary">poster le commentaire</button>
+					<button class="btn btn-secondary mt-2">Poster le commentaire</button>
 				</form>
 			</div>
 		{% endif %}

@@ -30,13 +30,13 @@ class PageMesArticlesController extends AbstractController
     // AFFICHER TOUT MES ARTICLES
     public function mesArticles()
     {
-        $session_test = 1;
+        $id = $this->getUser()->getId();
 
         // SELECT * WHERE ID USER = ID USER CONNECTÉ        
         /** @var Article $mes_articles */
         $mes_articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findArticleByUserId($session_test); //
+            ->findArticleByUserId($id); //
 
 
         return $this->render('article/voirArticles.html.twig', [

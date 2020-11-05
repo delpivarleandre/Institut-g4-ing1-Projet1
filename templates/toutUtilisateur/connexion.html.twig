@@ -1,7 +1,7 @@
 {% if app.user %}
-    <a href="/mesArticles" class="btn btn-secondary">mes articles</a>
-    <a href="/logout" class="btn btn-danger">déconnexion</a>
+    <a href="{{ path('mes_articles') }}" class="btn btn-secondary mr-2">mes articles</a>
+    <a href="{{ path('app_logout') }}" class="btn btn-danger">déconnexion</a>
   {% else %}
-    <a href="/login" class="btn btn-primary">connexion</a>
-    <a href="/register" class="btn btn-info">inscription</a>
+    <a href="{{ path('app_login') }}" class="btn btn-primary mr-2">connexion</a>
+    <a href="{{ path('app_register') }}" class="btn btn-info">inscription</a>
 {% endif %}
