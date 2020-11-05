@@ -110,3 +110,8 @@ header {
 .form-check {
   padding-left: 2rem;
 }
+
+.height {
+  max-height: 24em;
+  overflow:hidden;
+}

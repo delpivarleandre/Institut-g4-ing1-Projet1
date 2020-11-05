@@ -40,7 +40,7 @@ class Article
     private $date_modif;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="Id", orphanRemoval=true)
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_user;
