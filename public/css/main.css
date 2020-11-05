@@ -26,7 +26,7 @@ header {
   border: none;
   text-align: left;
   display: flex;
-  width: 50%;
+  width: auto;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
@@ -34,16 +34,22 @@ header {
   margin-left: 10px;
 }
 
+.search:focus{
+  outline: none;
+}
+
 .searchOptions {
-  display: flex;
-  width: 30%;
-  justify-content: space-evenly;
+  display: inline-flex;
+  width: auto;
+  justify-content: space-around;
+  white-space:nowrap;
 }
 
 .searchBar {
   align-self: center;
+  justify-self: center;
   display: flex;
-  width:30%;
+  width:auto;
   height: 30px;
   background-color: white;
   border-bottom-left-radius: 15px;
@@ -57,11 +63,18 @@ header {
 }
 
 .connection {
-  width: auto;
+  width: 1px;
   display: flex;
   align-items: center;
+  justify-items: flex-end;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: end;
+  justify-self: end;
+}
+
+.image {
+  width: 1px;
+  overflow: visible
 }
 
 .paddingh1 {
